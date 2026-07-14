@@ -1,0 +1,17 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Railway injects $PORT automatically; start-railway.sh reads it.
+# Set SUDO_USERNAME / SUDO_PASSWORD in the Railway service's Variables tab
+# to auto-create the first sudo admin on boot.
+[env]
+XRAY_EXECUTABLE_PATH = "/usr/local/bin/xray"
+XRAY_ASSETS_PATH = "/usr/local/share/xray"
+SQLALCHEMY_DATABASE_URL = "sqlite:////code/db.sqlite3"
